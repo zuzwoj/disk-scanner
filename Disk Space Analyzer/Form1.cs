@@ -11,8 +11,8 @@ namespace Disk_Space_Analyzer
         public Form1()
         {
             InitializeComponent();
-            // https://www.c-sharpcorner.com/article/display-sub-directories-and-files-in-treeview/
             this.treeView1.Nodes.Clear();
+            ReturnValue = "";
             DriveInfo[] allDrives = DriveInfo.GetDrives();
             foreach (DriveInfo drive in allDrives)
             {
@@ -83,23 +83,22 @@ namespace Disk_Space_Analyzer
 
         void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            // https://learn.microsoft.com/en-us/dotnet/desktop/winforms/controls/creating-an-explorer-style-interface-with-the-listview-and-treeview?view=netframeworkdesktop-4.8
             TreeNode newSelected = e.Node;
             DirectoryInfo nodeDirInfo;
-            string id = "<files>";
+            string? id = "<files>";
             if (e.Node.Tag != null)
             {
                 id = e.Node.Tag.ToString();
-                nodeDirInfo = new DirectoryInfo(id);
+                nodeDirInfo = new DirectoryInfo(id!);
             }
-            else nodeDirInfo = new DirectoryInfo(e.Node.Parent.Tag.ToString());
-            TreeNode item = null;
+            else nodeDirInfo = new DirectoryInfo(e.Node.Parent.Tag.ToString()!);
+            TreeNode? item = null;
             int subdirs = 0, files = 0;
             try
             {
                 foreach (DirectoryInfo dir in nodeDirInfo.GetDirectories())
                 {
-                    if (!Displayed.Contains(id) && id != "<files>")
+                    if (!Displayed.Contains(id!) && id != "<files>")
                     {
                         item = new TreeNode(dir.Name);
                         item.Tag = dir.FullName;
@@ -111,7 +110,7 @@ namespace Disk_Space_Analyzer
             catch { }
             try
             {
-                if (!Displayed.Contains(id) && id != "<files>" && nodeDirInfo.GetFiles().Length > 2)
+                if (!Displayed.Contains(id!) && id != "<files>" && nodeDirInfo.GetFiles().Length > 2)
                 {
                     item = new TreeNode("<files>");
                     newSelected.Nodes.Add(item);
@@ -119,7 +118,7 @@ namespace Disk_Space_Analyzer
                 }
                 foreach (FileInfo file in nodeDirInfo.GetFiles())
                 {
-                    if (!Displayed.Contains(id) && id != "<files>")
+                    if (!Displayed.Contains(id!) && id != "<files>")
                     {
                         item = new TreeNode(file.Name);
                         item.Tag = file.FullName;
@@ -129,11 +128,9 @@ namespace Disk_Space_Analyzer
                 }
             }
             catch { }
-            if (!Displayed.Contains(id) && id != "<files>") Displayed.Add(id);
+            if (!Displayed.Contains(id!) && id != "<files>") Displayed.Add(id!);
             string size;
-            // https://stackoverflow.com/questions/1118568/how-do-i-get-a-directory-size-files-in-the-directory-in-c
-            try { size = nodeDirInfo.EnumerateFiles("*.*", SearchOption.AllDirectories).Sum(fi => fi.Length).ToString(); } catch (Exception ex) { size = "0"; }
-            //textBox1.Clear();
+            try { size = nodeDirInfo.EnumerateFiles("*.*", SearchOption.AllDirectories).Sum(fi => fi.Length).ToString(); } catch { size = "0"; }
             fullPath.Clear();
             this.size.Clear();
             items.Clear();
@@ -142,8 +139,6 @@ namespace Disk_Space_Analyzer
             lastChange.Clear();
             if (id != "<files>") try
                 {
-                    /*textBox1.AppendText("Full Path: " + nodeDirInfo.FullName + "\r\nSize: " + size + " Bytes" + "\r\nItems: " + (subdirs + files).ToString()
-                        + "\r\nFiles: " + files.ToString() + "\r\nSubdirs: " + subdirs.ToString() + "\r\nLastChange: " + nodeDirInfo.LastWriteTimeUtc);*/
                     fullPath.AppendText(nodeDirInfo.FullName);
                     this.size.AppendText(size + " Bytes");
                     items.AppendText((subdirs + files).ToString());
@@ -158,7 +153,7 @@ namespace Disk_Space_Analyzer
         {
             Dictionary<string, long> workVolume = new Dictionary<string, long>();
             Dictionary<string, int> workQuantity = new Dictionary<string, int>();
-            DirectoryInfo nodeDirInfo = new DirectoryInfo((string)e.Argument);
+            DirectoryInfo nodeDirInfo = new DirectoryInfo((string)e.Argument!);
             int count = nodeDirInfo.EnumerateDirectories().Count();
             int I = 0;
             foreach (var dir in nodeDirInfo.GetDirectories())
@@ -248,16 +243,16 @@ namespace Disk_Space_Analyzer
                 for (int i = 0; i < 9; ++i)
                 {
                     var elem1 = workResult?.Item1.MaxBy(x => x.Value);
-                    workResult?.Item1.Remove(elem1?.Key);
-                    userControl12.typesVolume[i] = (elem1?.Key, elem1?.Value ?? 0);
+                    workResult?.Item1.Remove(elem1?.Key!);
+                    userControl12.typesVolume[i] = (elem1?.Key!, elem1?.Value ?? 0);
                     var elem2 = workResult?.Item2.MaxBy(x => x.Value);
-                    workResult?.Item2.Remove(elem2?.Key);
-                    userControl12.typesQuantity[i] = (elem2?.Key, elem2?.Value ?? 0);
+                    workResult?.Item2.Remove(elem2?.Key!);
+                    userControl12.typesQuantity[i] = (elem2?.Key!, elem2?.Value ?? 0);
                 }
                 long otherVolume = 0;
                 int otherQuantity = 0;
-                foreach (var elem in workResult?.Item1) otherVolume += elem.Value;
-                foreach (var elem in workResult?.Item2) otherQuantity += elem.Value;
+                foreach (var elem in workResult?.Item1!) otherVolume += elem.Value;
+                foreach (var elem in workResult?.Item2!) otherQuantity += elem.Value;
                 userControl12.typesVolume[9] = ("Others", otherVolume);
                 userControl12.typesQuantity[9] = ("Others", otherQuantity);
             }
@@ -268,21 +263,17 @@ namespace Disk_Space_Analyzer
                 for (int i = 0; i < times; ++i)
                 {
                     var elem1 = workResult?.Item1.MaxBy(x => x.Value);
-                    workResult?.Item1.Remove(elem1?.Key);
-                    userControl12.typesVolume[i] = (elem1?.Key, elem1?.Value ?? 0);
+                    workResult?.Item1.Remove(elem1?.Key!);
+                    userControl12.typesVolume[i] = (elem1?.Key!, elem1?.Value ?? 0);
                     var elem2 = workResult?.Item2.MaxBy(x => x.Value);
-                    workResult?.Item2.Remove(elem2?.Key);
-                    userControl12.typesQuantity[i] = (elem2?.Key, elem2?.Value ?? 0);
+                    workResult?.Item2.Remove(elem2?.Key!);
+                    userControl12.typesQuantity[i] = (elem2?.Key!, elem2?.Value ?? 0);
                 }
             }
             userControl12.Refresh();
         }
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e) { backgroundWorker1.CancelAsync(); }
-
-        private void Form1_Resize(object sender, EventArgs e)
-        {
-            userControl12.Refresh();
-        }
+        private void Form1_Resize(object sender, EventArgs e) { userControl12.Refresh(); }
     }
 }

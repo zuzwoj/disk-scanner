@@ -5,21 +5,21 @@ namespace Disk_Space_Analyzer
 {
     public partial class popupForm : Form
     {
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        private RadioButton? radioButton1;
+        private RadioButton? radioButton2;
         private ListView listView1;
-        private ColumnHeader name;
-        private ColumnHeader total;
-        private ColumnHeader free;
-        private ColumnHeader usedtotal;
-        private RadioButton radioButton3;
-        private Button button1;
-        private Button button2;
-        private FolderBrowserDialog folderBrowserDialog1;
-        private Button button3;
+        private ColumnHeader? name;
+        private ColumnHeader? total;
+        private ColumnHeader? free;
+        private ColumnHeader? usedtotal;
+        private RadioButton? radioButton3;
+        private Button? button1;
+        private Button? button2;
+        private FolderBrowserDialog? folderBrowserDialog1;
+        private Button? button3;
         System.Windows.Forms.DialogResult result = 0;
-        private ColumnHeader progressbar;
-        private ComboBox comboBox1;
+        private ColumnHeader? progressbar;
+        private ComboBox? comboBox1;
         public List<string> list = new List<string>();
 
         public popupForm()
@@ -35,7 +35,7 @@ namespace Disk_Space_Analyzer
                 newItem.SubItems.Add((d.AvailableFreeSpace / 1073741824).ToString() + "GB");
                 newItem.SubItems.Add("etwas");
                 newItem.SubItems.Add(taken.ToString() + "%");
-                listView1.Items.Add(newItem);
+                listView1!.Items.Add(newItem);
                 listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
                 ProgressBar pb = new ProgressBar();
                 Rectangle r = listView1.GetItemRect(0);
@@ -49,7 +49,7 @@ namespace Disk_Space_Analyzer
                 pb.ForeColor = Color.DarkBlue;
                 listView1.Controls.Add(pb);
             }
-            listView1.Refresh();
+            listView1!.Refresh();
         }
         private void InitializeComponent()
         {
@@ -80,8 +80,8 @@ namespace Disk_Space_Analyzer
             radioButton1.TabStop = true;
             radioButton1.Text = "All Local Drives";
             radioButton1.UseVisualStyleBackColor = true;
-            radioButton1.CheckedChanged += radioButton1_CheckedChanged;
-            radioButton1.Click += radioButton1_CheckedChanged;
+            radioButton1.CheckedChanged += radioButton1_CheckedChanged!;
+            radioButton1.Click += radioButton1_CheckedChanged!;
             // 
             // radioButton2
             // 
@@ -92,8 +92,8 @@ namespace Disk_Space_Analyzer
             radioButton2.TabIndex = 1;
             radioButton2.Text = "Individual Drives";
             radioButton2.UseVisualStyleBackColor = true;
-            radioButton2.CheckedChanged += radioButton2_CheckedChanged;
-            radioButton2.Click += radioButton2_CheckedChanged;
+            radioButton2.CheckedChanged += radioButton2_CheckedChanged!;
+            radioButton2.Click += radioButton2_CheckedChanged!;
             // 
             // listView1
             // 
@@ -136,8 +136,8 @@ namespace Disk_Space_Analyzer
             radioButton3.TabIndex = 3;
             radioButton3.Text = "A Folder";
             radioButton3.UseVisualStyleBackColor = true;
-            radioButton3.CheckedChanged += radioButton3_CheckedChanged;
-            radioButton3.Click += radioButton3_CheckedChanged;
+            radioButton3.CheckedChanged += radioButton3_CheckedChanged!;
+            radioButton3.Click += radioButton3_CheckedChanged!;
             // 
             // button1
             // 
@@ -147,7 +147,7 @@ namespace Disk_Space_Analyzer
             button1.TabIndex = 5;
             button1.Text = "...";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += browseButton_Click;
+            button1.Click += browseButton_Click!;
             // 
             // button2
             // 
@@ -157,7 +157,7 @@ namespace Disk_Space_Analyzer
             button2.TabIndex = 6;
             button2.Text = "Cancel";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += cancelButton_Click;
+            button2.Click += cancelButton_Click!;
             // 
             // button3
             // 
@@ -167,7 +167,7 @@ namespace Disk_Space_Analyzer
             button3.TabIndex = 7;
             button3.Text = "OK";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += okButton_Click;
+            button3.Click += okButton_Click!;
             // 
             // comboBox1
             // 
@@ -178,7 +178,7 @@ namespace Disk_Space_Analyzer
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(379, 23);
             comboBox1.TabIndex = 8;
-            comboBox1.TextUpdate += textBox1_TextChanged;
+            comboBox1.TextUpdate += textBox1_TextChanged!;
             // 
             // popupForm
             // 
@@ -197,18 +197,17 @@ namespace Disk_Space_Analyzer
             Name = "popupForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Select Disc or Folder";
-            KeyDown += popupForm_KeyDown;
+            KeyDown += popupForm_KeyDown!;
             ResumeLayout(false);
             PerformLayout();
         }
 
         private void browseButton_Click(object sender, EventArgs e)
         {
-            // https://stackoverflow.com/questions/11624298/how-do-i-use-openfiledialog-to-select-a-folder
-            result = folderBrowserDialog1.ShowDialog();
+            result = folderBrowserDialog1!.ShowDialog();
             if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderBrowserDialog1.SelectedPath))
             {
-                comboBox1.Text = folderBrowserDialog1.SelectedPath;
+                comboBox1!.Text = folderBrowserDialog1.SelectedPath;
                 comboBox1.ForeColor = Color.Black;
                 comboBox1.Refresh();
             }
@@ -218,15 +217,15 @@ namespace Disk_Space_Analyzer
 
         private void okButton_Click(object sender, EventArgs e)
         {
-            if (result == DialogResult.OK || radioButton1.Checked || radioButton2.Checked)
+            if (result == DialogResult.OK || radioButton1!.Checked || radioButton2!.Checked)
             {
-                if (radioButton1.Checked)
+                if (radioButton1!.Checked)
                 {
                     DriveInfo[] allDrives = DriveInfo.GetDrives();
                     foreach (DriveInfo d in allDrives) list.Add(d.Name);
                 }
-                else if (radioButton2.Checked) { foreach (var item in listView1.Items) list.Add(((ListViewItem)item).Text); }
-                else { list.Add(comboBox1.Text); }
+                else if (radioButton2!.Checked) { foreach (var item in listView1.Items) list.Add(((ListViewItem)item).Text); }
+                else { list.Add(comboBox1!.Text); }
                 this.Close();
             }
         }
@@ -234,16 +233,16 @@ namespace Disk_Space_Analyzer
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
             listView1.Enabled = false;
-            comboBox1.Enabled = false;
-            button1.Enabled = false;
+            comboBox1!.Enabled = false;
+            button1!.Enabled = false;
             comboBox1.Refresh();
             listView1.Refresh();
         }
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
             listView1.Enabled = true;
-            comboBox1.Enabled = false;
-            button1.Enabled = false;
+            comboBox1!.Enabled = false;
+            button1!.Enabled = false;
             comboBox1.Refresh();
             listView1.Refresh();
         }
@@ -251,22 +250,22 @@ namespace Disk_Space_Analyzer
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
             listView1.Enabled = false;
-            comboBox1.Enabled = true;
-            button1.Enabled = true;
+            comboBox1!.Enabled = true;
+            button1!.Enabled = true;
             comboBox1.Refresh();
             listView1.Refresh();
         }
 
         private void popupForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Alt && e.KeyCode == Keys.A) { radioButton1.PerformClick(); }
-            else if (e.Alt && e.KeyCode == Keys.I) { radioButton2.PerformClick(); }
-            else if (e.Alt && e.KeyCode == Keys.F) { radioButton3.PerformClick(); }
+            if (e.Alt && e.KeyCode == Keys.A) { radioButton1!.PerformClick(); }
+            else if (e.Alt && e.KeyCode == Keys.I) { radioButton2!.PerformClick(); }
+            else if (e.Alt && e.KeyCode == Keys.F) { radioButton3!.PerformClick(); }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (System.IO.Directory.Exists(comboBox1.Text)) { comboBox1.ForeColor = Color.Black; }
+            if (System.IO.Directory.Exists(comboBox1!.Text)) { comboBox1.ForeColor = Color.Black; }
             else { comboBox1.ForeColor = Color.Red; }
             Refresh();
         }
