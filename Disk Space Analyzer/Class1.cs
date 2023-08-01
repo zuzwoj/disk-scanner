@@ -29,7 +29,7 @@ namespace Disk_Space_Analyzer
             foreach (DriveInfo d in allDrives)
             {
                 ListViewItem newItem = new ListViewItem();
-                int taken = (int)(100 * (double)d.AvailableFreeSpace / (double)d.TotalSize);
+                int taken = (int)(100 * (1 - (double)d.AvailableFreeSpace / d.TotalSize));
                 newItem.Text = d.Name;
                 newItem.SubItems.Add((d.TotalSize / 1073741824).ToString() + "GB");
                 newItem.SubItems.Add((d.AvailableFreeSpace / 1073741824).ToString() + "GB");

@@ -278,7 +278,7 @@ namespace Disk_Space_Analyzer
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var popup = new Form();
+            var popup = new AboutWindow();
             popup.ShowDialog(this);
         }
     }

@@ -35,7 +35,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Name = "UserControl1";
-            Size = new Size(509, 303);
+            Size = new Size(577, 303);
             Load += UserControl1_Load;
             Paint += UserControl1_Paint;
             ResumeLayout(false);

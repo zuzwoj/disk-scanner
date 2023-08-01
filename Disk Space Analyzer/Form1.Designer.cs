@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             splitContainer1 = new SplitContainer();
             treeView1 = new TreeView();
             button1 = new Button();
@@ -88,15 +89,15 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(tabControl1);
-            splitContainer1.Size = new Size(784, 387);
-            splitContainer1.SplitterDistance = 260;
+            splitContainer1.Size = new Size(904, 410);
+            splitContainer1.SplitterDistance = 264;
             splitContainer1.TabIndex = 0;
             // 
             // treeView1
             // 
             treeView1.Location = new Point(3, 32);
             treeView1.Name = "treeView1";
-            treeView1.Size = new Size(254, 330);
+            treeView1.Size = new Size(254, 353);
             treeView1.TabIndex = 1;
             treeView1.NodeMouseClick += treeView1_NodeMouseClick;
             // 
@@ -118,7 +119,7 @@
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(520, 387);
+            tabControl1.Size = new Size(636, 410);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -127,7 +128,7 @@
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(512, 359);
+            tabPage1.Size = new Size(628, 382);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Details";
             tabPage1.UseVisualStyleBackColor = true;
@@ -295,7 +296,7 @@
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(512, 359);
+            tabPage2.Size = new Size(628, 382);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Charts";
             tabPage2.UseVisualStyleBackColor = true;
@@ -324,7 +325,7 @@
             // 
             userControl12.Location = new Point(3, 35);
             userControl12.Name = "userControl12";
-            userControl12.Size = new Size(509, 303);
+            userControl12.Size = new Size(619, 326);
             userControl12.TabIndex = 0;
             // 
             // menuStrip1
@@ -332,7 +333,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, helpToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(784, 24);
+            menuStrip1.Size = new Size(904, 24);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -387,16 +388,16 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(180, 22);
+            aboutToolStripMenuItem.Size = new Size(109, 22);
             aboutToolStripMenuItem.Text = "About";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 
             statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripProgressBar1 });
-            statusStrip1.Location = new Point(0, 389);
+            statusStrip1.Location = new Point(0, 412);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(784, 22);
+            statusStrip1.Size = new Size(904, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -417,10 +418,11 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(784, 411);
+            ClientSize = new Size(904, 434);
             Controls.Add(statusStrip1);
             Controls.Add(splitContainer1);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             MinimumSize = new Size(800, 450);
             Name = "Form1";
