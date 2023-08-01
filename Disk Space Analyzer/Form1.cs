@@ -275,5 +275,11 @@ namespace Disk_Space_Analyzer
 
         private void cancelToolStripMenuItem_Click(object sender, EventArgs e) { backgroundWorker1.CancelAsync(); }
         private void Form1_Resize(object sender, EventArgs e) { userControl12.Refresh(); }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var popup = new Form();
+            popup.ShowDialog(this);
+        }
     }
 }

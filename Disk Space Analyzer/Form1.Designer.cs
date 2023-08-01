@@ -33,6 +33,19 @@
             button1 = new Button();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            lastChange = new TextBox();
+            subdirs = new TextBox();
+            files = new TextBox();
+            items = new TextBox();
+            size = new TextBox();
+            fullPath = new TextBox();
+            textBox1 = new TextBox();
+            textBox2 = new TextBox();
+            textBox3 = new TextBox();
+            textBox4 = new TextBox();
+            textBox5 = new TextBox();
+            textBox6 = new TextBox();
             tabPage2 = new TabPage();
             comboBox1 = new ComboBox();
             label1 = new Label();
@@ -49,29 +62,16 @@
             statusStrip1 = new StatusStrip();
             toolStripProgressBar1 = new ToolStripProgressBar();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            tableLayoutPanel1 = new TableLayoutPanel();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox5 = new TextBox();
-            textBox6 = new TextBox();
-            fullPath = new TextBox();
-            size = new TextBox();
-            items = new TextBox();
-            files = new TextBox();
-            subdirs = new TextBox();
-            lastChange = new TextBox();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             tabPage2.SuspendLayout();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
-            tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -131,6 +131,161 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Details";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 300F));
+            tableLayoutPanel1.Controls.Add(lastChange, 1, 5);
+            tableLayoutPanel1.Controls.Add(subdirs, 1, 4);
+            tableLayoutPanel1.Controls.Add(files, 1, 3);
+            tableLayoutPanel1.Controls.Add(items, 1, 2);
+            tableLayoutPanel1.Controls.Add(size, 1, 1);
+            tableLayoutPanel1.Controls.Add(fullPath, 1, 0);
+            tableLayoutPanel1.Controls.Add(textBox1, 0, 0);
+            tableLayoutPanel1.Controls.Add(textBox2, 0, 1);
+            tableLayoutPanel1.Controls.Add(textBox3, 0, 2);
+            tableLayoutPanel1.Controls.Add(textBox4, 0, 3);
+            tableLayoutPanel1.Controls.Add(textBox5, 0, 4);
+            tableLayoutPanel1.Controls.Add(textBox6, 0, 5);
+            tableLayoutPanel1.Location = new Point(6, 6);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 6;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
+            tableLayoutPanel1.Size = new Size(498, 153);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
+            // lastChange
+            // 
+            lastChange.BackColor = Color.White;
+            lastChange.BorderStyle = BorderStyle.None;
+            lastChange.Location = new Point(103, 128);
+            lastChange.Name = "lastChange";
+            lastChange.ReadOnly = true;
+            lastChange.Size = new Size(392, 16);
+            lastChange.TabIndex = 11;
+            // 
+            // subdirs
+            // 
+            subdirs.BackColor = Color.White;
+            subdirs.BorderStyle = BorderStyle.None;
+            subdirs.Location = new Point(103, 103);
+            subdirs.Name = "subdirs";
+            subdirs.ReadOnly = true;
+            subdirs.Size = new Size(392, 16);
+            subdirs.TabIndex = 10;
+            // 
+            // files
+            // 
+            files.BackColor = Color.White;
+            files.BorderStyle = BorderStyle.None;
+            files.Location = new Point(103, 78);
+            files.Name = "files";
+            files.ReadOnly = true;
+            files.Size = new Size(392, 16);
+            files.TabIndex = 9;
+            // 
+            // items
+            // 
+            items.BackColor = Color.White;
+            items.BorderStyle = BorderStyle.None;
+            items.Location = new Point(103, 53);
+            items.Name = "items";
+            items.ReadOnly = true;
+            items.Size = new Size(392, 16);
+            items.TabIndex = 8;
+            // 
+            // size
+            // 
+            size.BackColor = Color.White;
+            size.BorderStyle = BorderStyle.None;
+            size.Location = new Point(103, 28);
+            size.Name = "size";
+            size.ReadOnly = true;
+            size.Size = new Size(392, 16);
+            size.TabIndex = 7;
+            // 
+            // fullPath
+            // 
+            fullPath.BackColor = Color.White;
+            fullPath.BorderStyle = BorderStyle.None;
+            fullPath.Location = new Point(103, 3);
+            fullPath.Name = "fullPath";
+            fullPath.ReadOnly = true;
+            fullPath.Size = new Size(392, 16);
+            fullPath.TabIndex = 6;
+            // 
+            // textBox1
+            // 
+            textBox1.BackColor = Color.White;
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Location = new Point(3, 3);
+            textBox1.Name = "textBox1";
+            textBox1.ReadOnly = true;
+            textBox1.Size = new Size(94, 16);
+            textBox1.TabIndex = 0;
+            textBox1.Text = "Full Path:";
+            // 
+            // textBox2
+            // 
+            textBox2.BackColor = Color.White;
+            textBox2.BorderStyle = BorderStyle.None;
+            textBox2.Location = new Point(3, 28);
+            textBox2.Name = "textBox2";
+            textBox2.ReadOnly = true;
+            textBox2.Size = new Size(94, 16);
+            textBox2.TabIndex = 1;
+            textBox2.Text = "Size:";
+            // 
+            // textBox3
+            // 
+            textBox3.BackColor = Color.White;
+            textBox3.BorderStyle = BorderStyle.None;
+            textBox3.Location = new Point(3, 53);
+            textBox3.Name = "textBox3";
+            textBox3.ReadOnly = true;
+            textBox3.Size = new Size(94, 16);
+            textBox3.TabIndex = 2;
+            textBox3.Text = "Item:";
+            // 
+            // textBox4
+            // 
+            textBox4.BackColor = Color.White;
+            textBox4.BorderStyle = BorderStyle.None;
+            textBox4.Location = new Point(3, 78);
+            textBox4.Name = "textBox4";
+            textBox4.ReadOnly = true;
+            textBox4.Size = new Size(94, 16);
+            textBox4.TabIndex = 3;
+            textBox4.Text = "Files:";
+            // 
+            // textBox5
+            // 
+            textBox5.BackColor = Color.White;
+            textBox5.BorderStyle = BorderStyle.None;
+            textBox5.Location = new Point(3, 103);
+            textBox5.Name = "textBox5";
+            textBox5.ReadOnly = true;
+            textBox5.Size = new Size(94, 16);
+            textBox5.TabIndex = 4;
+            textBox5.Text = "Subdirs:";
+            // 
+            // textBox6
+            // 
+            textBox6.BackColor = Color.White;
+            textBox6.BorderStyle = BorderStyle.None;
+            textBox6.Location = new Point(3, 128);
+            textBox6.Name = "textBox6";
+            textBox6.ReadOnly = true;
+            textBox6.Size = new Size(94, 16);
+            textBox6.TabIndex = 5;
+            textBox6.Text = "Last change:";
             // 
             // tabPage2
             // 
@@ -232,8 +387,9 @@
             // aboutToolStripMenuItem
             // 
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            aboutToolStripMenuItem.Size = new Size(109, 22);
+            aboutToolStripMenuItem.Size = new Size(180, 22);
             aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 
@@ -257,161 +413,6 @@
             backgroundWorker1.ProgressChanged += backgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += backgroundWorker1_RunWorkerCompleted;
             // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 300F));
-            tableLayoutPanel1.Controls.Add(lastChange, 1, 5);
-            tableLayoutPanel1.Controls.Add(subdirs, 1, 4);
-            tableLayoutPanel1.Controls.Add(files, 1, 3);
-            tableLayoutPanel1.Controls.Add(items, 1, 2);
-            tableLayoutPanel1.Controls.Add(size, 1, 1);
-            tableLayoutPanel1.Controls.Add(fullPath, 1, 0);
-            tableLayoutPanel1.Controls.Add(textBox1, 0, 0);
-            tableLayoutPanel1.Controls.Add(textBox2, 0, 1);
-            tableLayoutPanel1.Controls.Add(textBox3, 0, 2);
-            tableLayoutPanel1.Controls.Add(textBox4, 0, 3);
-            tableLayoutPanel1.Controls.Add(textBox5, 0, 4);
-            tableLayoutPanel1.Controls.Add(textBox6, 0, 5);
-            tableLayoutPanel1.Location = new Point(6, 6);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 6;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 25F));
-            tableLayoutPanel1.Size = new Size(498, 153);
-            tableLayoutPanel1.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            textBox1.BackColor = Color.White;
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(3, 3);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(94, 16);
-            textBox1.TabIndex = 0;
-            textBox1.Text = "Full Path:";
-            // 
-            // textBox2
-            // 
-            textBox2.BackColor = Color.White;
-            textBox2.BorderStyle = BorderStyle.None;
-            textBox2.Location = new Point(3, 28);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(94, 16);
-            textBox2.TabIndex = 1;
-            textBox2.Text = "Size:";
-            // 
-            // textBox3
-            // 
-            textBox3.BackColor = Color.White;
-            textBox3.BorderStyle = BorderStyle.None;
-            textBox3.Location = new Point(3, 53);
-            textBox3.Name = "textBox3";
-            textBox3.ReadOnly = true;
-            textBox3.Size = new Size(94, 16);
-            textBox3.TabIndex = 2;
-            textBox3.Text = "Item:";
-            // 
-            // textBox4
-            // 
-            textBox4.BackColor = Color.White;
-            textBox4.BorderStyle = BorderStyle.None;
-            textBox4.Location = new Point(3, 78);
-            textBox4.Name = "textBox4";
-            textBox4.ReadOnly = true;
-            textBox4.Size = new Size(94, 16);
-            textBox4.TabIndex = 3;
-            textBox4.Text = "Files:";
-            // 
-            // textBox5
-            // 
-            textBox5.BackColor = Color.White;
-            textBox5.BorderStyle = BorderStyle.None;
-            textBox5.Location = new Point(3, 103);
-            textBox5.Name = "textBox5";
-            textBox5.ReadOnly = true;
-            textBox5.Size = new Size(94, 16);
-            textBox5.TabIndex = 4;
-            textBox5.Text = "Subdirs:";
-            // 
-            // textBox6
-            // 
-            textBox6.BackColor = Color.White;
-            textBox6.BorderStyle = BorderStyle.None;
-            textBox6.Location = new Point(3, 128);
-            textBox6.Name = "textBox6";
-            textBox6.ReadOnly = true;
-            textBox6.Size = new Size(94, 16);
-            textBox6.TabIndex = 5;
-            textBox6.Text = "Last change:";
-            // 
-            // fullPath
-            // 
-            fullPath.BackColor = Color.White;
-            fullPath.BorderStyle = BorderStyle.None;
-            fullPath.Location = new Point(103, 3);
-            fullPath.Name = "fullPath";
-            fullPath.ReadOnly = true;
-            fullPath.Size = new Size(392, 16);
-            fullPath.TabIndex = 6;
-            // 
-            // size
-            // 
-            size.BackColor = Color.White;
-            size.BorderStyle = BorderStyle.None;
-            size.Location = new Point(103, 28);
-            size.Name = "size";
-            size.ReadOnly = true;
-            size.Size = new Size(392, 16);
-            size.TabIndex = 7;
-            // 
-            // items
-            // 
-            items.BackColor = Color.White;
-            items.BorderStyle = BorderStyle.None;
-            items.Location = new Point(103, 53);
-            items.Name = "items";
-            items.ReadOnly = true;
-            items.Size = new Size(392, 16);
-            items.TabIndex = 8;
-            // 
-            // files
-            // 
-            files.BackColor = Color.White;
-            files.BorderStyle = BorderStyle.None;
-            files.Location = new Point(103, 78);
-            files.Name = "files";
-            files.ReadOnly = true;
-            files.Size = new Size(392, 16);
-            files.TabIndex = 9;
-            // 
-            // subdirs
-            // 
-            subdirs.BackColor = Color.White;
-            subdirs.BorderStyle = BorderStyle.None;
-            subdirs.Location = new Point(103, 103);
-            subdirs.Name = "subdirs";
-            subdirs.ReadOnly = true;
-            subdirs.Size = new Size(392, 16);
-            subdirs.TabIndex = 10;
-            // 
-            // lastChange
-            // 
-            lastChange.BackColor = Color.White;
-            lastChange.BorderStyle = BorderStyle.None;
-            lastChange.Location = new Point(103, 128);
-            lastChange.Name = "lastChange";
-            lastChange.ReadOnly = true;
-            lastChange.Size = new Size(392, 16);
-            lastChange.TabIndex = 11;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -433,14 +434,14 @@
             splitContainer1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
-            tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
