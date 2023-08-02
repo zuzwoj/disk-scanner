@@ -8,6 +8,7 @@ namespace Disk_Space_Analyzer
     {
         public string ReturnValue { get; set; }
         public List<string> Displayed = new List<string>();
+        public static readonly string[] units = { "bytes", "KB", "MB", "GB", "TB", "PB" };
         public Form1()
         {
             InitializeComponent();
@@ -77,6 +78,7 @@ namespace Disk_Space_Analyzer
                 }
                 toolStripProgressBar1.Value = 0;
                 statusStrip1.Refresh();
+                if (backgroundWorker1.IsBusy) backgroundWorker1.CancelAsync();
                 backgroundWorker1.RunWorkerAsync(argument: treeView1.Nodes[0].Tag.ToString());
             }
         }
@@ -129,8 +131,14 @@ namespace Disk_Space_Analyzer
             }
             catch { }
             if (!Displayed.Contains(id!) && id != "<files>") Displayed.Add(id!);
-            string size;
-            try { size = nodeDirInfo.EnumerateFiles("*.*", SearchOption.AllDirectories).Sum(fi => fi.Length).ToString(); } catch { size = "0"; }
+            long size;
+            int un = 0;
+            try { size = nodeDirInfo.EnumerateFiles("*.*", SearchOption.AllDirectories).Sum(fi => fi.Length); } catch { size = 0; }
+            while (size >= 1024)
+            {
+                size /= 1024;
+                ++un;
+            }
             fullPath.Clear();
             this.size.Clear();
             items.Clear();
@@ -140,7 +148,7 @@ namespace Disk_Space_Analyzer
             if (id != "<files>") try
                 {
                     fullPath.AppendText(nodeDirInfo.FullName);
-                    this.size.AppendText(size + " Bytes");
+                    this.size.AppendText(size + " " + units[un]);
                     items.AppendText((subdirs + files).ToString());
                     this.files.AppendText(files.ToString());
                     this.subdirs.AppendText(subdirs.ToString());
@@ -273,7 +281,7 @@ namespace Disk_Space_Analyzer
             userControl12.Refresh();
         }
 
-        private void cancelToolStripMenuItem_Click(object sender, EventArgs e) { backgroundWorker1.CancelAsync(); }
+        private void cancelToolStripMenuItem_Click(object sender, EventArgs e) { if (backgroundWorker1.IsBusy) backgroundWorker1.CancelAsync(); }
         private void Form1_Resize(object sender, EventArgs e) { userControl12.Refresh(); }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)

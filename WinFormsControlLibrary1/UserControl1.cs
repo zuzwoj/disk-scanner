@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Security.Policy;
 
 namespace WinFormsControlLibrary1
 {
@@ -6,6 +7,9 @@ namespace WinFormsControlLibrary1
     {
         public UserControl1() { InitializeComponent(); }
         public int mode = -1;
+        public static int padding = 5;
+        public static int skip = 20;
+        public static readonly string[] units = { "bytes", "KB", "MB", "GB", "TB", "PB" };
         public (string, long)[] typesVolume = new (string, long)[0];
         public (string, int)[] typesQuantity = new (string, int)[0];
         private void contextMenuStrip1_Opening(object sender, System.ComponentModel.CancelEventArgs e) { }
@@ -24,8 +28,8 @@ namespace WinFormsControlLibrary1
             StringFormat drawFormat = new StringFormat();
             blackPen.Width = 1;
             Font font = new Font("Segoe UI", 10);
-            e.Graphics.DrawString("by quantity", font, drawBrush, 10, 290, drawFormat);
-            e.Graphics.DrawString("by file size", font, drawBrush, 290, 290, drawFormat);
+            e.Graphics.DrawString("by quantity", font, drawBrush, 10, 300, drawFormat);
+            e.Graphics.DrawString("by file size (bytes)", font, drawBrush, 290, 300, drawFormat);
 
             if (mode == 0)
             {
@@ -35,25 +39,34 @@ namespace WinFormsControlLibrary1
                 foreach (var elem in typesQuantity) totalQuantity += elem.Item2;
                 float[,] angles = new float[typesToDisplay, 2];
                 float offset;
+                long size;
+                int un;
                 for (int i = 0; i < typesToDisplay; ++i)
                 {
                     offset = 0;
                     angles[i, 0] = (float)typesQuantity[i].Item2 / totalQuantity * 360;
                     for (int j = 0; j < i; ++j) offset += angles[j, 0];
-                    e.Graphics.FillPie(colorBrush[i], 5, 5, 150, 150, offset, angles[i, 0]);
-                    e.Graphics.DrawPie(blackPen, 5, 5, 150, 150, offset, angles[i, 0]);
-                    e.Graphics.FillRectangle(colorBrush[i], 160, 5 + i * 20, 30, 15);
-                    e.Graphics.DrawRectangle(blackPen, 160, 5 + i * 20, 30, 15);
-                    e.Graphics.DrawString(typesQuantity[i].Item1 + " - " + typesQuantity[i].Item2.ToString(), font, drawBrush, 195, 5 + i * 20, drawFormat);
+                    e.Graphics.FillPie(colorBrush[i], padding, padding, 150, 150, offset, angles[i, 0]);
+                    e.Graphics.DrawPie(blackPen, padding, padding, 150, 150, offset, angles[i, 0]);
+                    e.Graphics.FillRectangle(colorBrush[i], 160, padding + i * skip, 30, 15);
+                    e.Graphics.DrawRectangle(blackPen, 160, padding + i * skip, 30, 15);
+                    e.Graphics.DrawString(typesQuantity[i].Item1 + " - " + typesQuantity[i].Item2, font, drawBrush, 195, padding + i * skip, drawFormat);
 
                     offset = 0;
                     angles[i, 1] = (float)typesVolume[i].Item2 / totalVolume * 360;
                     for (int j = 0; j < i; ++j) offset += angles[j, 1];
-                    e.Graphics.FillPie(colorBrush[i], 285, 5, 150, 150, offset, angles[i, 1]);
-                    e.Graphics.DrawPie(blackPen, 285, 5, 150, 150, offset, angles[i, 1]);
-                    e.Graphics.FillRectangle(colorBrush[i], 440, 5 + i * 20, 30, 15);
-                    e.Graphics.DrawRectangle(blackPen, 440, 5 + i * 20, 30, 15);
-                    e.Graphics.DrawString(typesVolume[i].Item1 + " - " + typesVolume[i].Item2.ToString(), font, drawBrush, 475, 5 + i * 20, drawFormat);
+                    e.Graphics.FillPie(colorBrush[i], 285, padding, 150, 150, offset, angles[i, 1]);
+                    e.Graphics.DrawPie(blackPen, 285, padding, 150, 150, offset, angles[i, 1]);
+                    e.Graphics.FillRectangle(colorBrush[i], 440, padding + i * skip, 30, 15);
+                    e.Graphics.DrawRectangle(blackPen, 440, padding + i * skip, 30, 15);
+                    size = typesVolume[i].Item2;
+                    un = 0;
+                    while (size >= 1024)
+                    {
+                        size /= 1024;
+                        ++un;
+                    }
+                    e.Graphics.DrawString(typesVolume[i].Item1 + " - " + size + units[un], font, drawBrush, 475, padding + i * skip, drawFormat);
                 }
             }
             else
@@ -64,8 +77,8 @@ namespace WinFormsControlLibrary1
                 float height;
                 float barQuantity;
                 long barVolume;
-                e.Graphics.FillRectangle(drawBrush2, 50, 5, 200, 250);
-                e.Graphics.FillRectangle(drawBrush2, 300, 5, 200, 250);
+                e.Graphics.FillRectangle(drawBrush2, 50, padding, 200, 250);
+                e.Graphics.FillRectangle(drawBrush2, 300, padding, 200, 250);
                 if (mode == 1)
                 {
                     barQuantity = (float)(Math.Pow(10, Math.Floor(Math.Log10(maxQuantity))) * Math.Ceiling(maxQuantity / Math.Pow(10, Math.Floor(Math.Log10(maxQuantity)))));
@@ -73,9 +86,9 @@ namespace WinFormsControlLibrary1
                     for (int i = 0; i < 11; ++i)
                     {
                         e.Graphics.DrawLine(blackPen, 50, 25 + 23 * i, 250, 25 + 23 * i);
-                        e.Graphics.DrawString(Math.Round(barQuantity * (1 - 0.1 * i)).ToString(), font, drawBrush, 10, 25 + 23 * i, drawFormat);
+                        e.Graphics.DrawString(Math.Round(barQuantity * (1 - 0.1 * i)).ToString(), font, drawBrush, 10, 15 + 23 * i, drawFormat);
                         e.Graphics.DrawLine(blackPen, 300, 25 + 23 * i, 500, 25 + 23 * i);
-                        e.Graphics.DrawString(Math.Round(barVolume * (1 - 0.1 * i)).ToString(), font, drawBrush, 260, 25 + 23 * i, drawFormat);
+                        e.Graphics.DrawString(Math.Round(barVolume * (1 - 0.1 * i)).ToString(), font, drawBrush, 260, 15 + 23 * i, drawFormat);
                     }
                 }
                 else
@@ -88,17 +101,15 @@ namespace WinFormsControlLibrary1
                     for (int i = 0; i < volumeBarCount; ++i)
                     {
                         e.Graphics.DrawLine(blackPen, 300, 255 - i * 230 / (volumeBarCount - 1), 500, 255 - i * 230 / (volumeBarCount - 1));
-                        e.Graphics.DrawString(bars.ToString(), font, drawBrush, 260, 255 - i * 230 / (volumeBarCount - 1), drawFormat);
-                        if (bars == 0) bars = 1;
-                        bars *= 10;
+                        e.Graphics.DrawString(10 + "^" + bars.ToString(), font, drawBrush, 260, 245 - i * 230 / (volumeBarCount - 1), drawFormat);
+                        ++bars;
                     }
                     bars = 0;
                     for (int i = 0; i < quantityBarCount; ++i)
                     {
                         e.Graphics.DrawLine(blackPen, 50, 255 - i * 230 / (quantityBarCount - 1), 250, 255 - i * 230 / (quantityBarCount - 1));
-                        e.Graphics.DrawString(bars.ToString(), font, drawBrush, 10, 255 - i * 230 / (quantityBarCount - 1), drawFormat);
-                        if (bars == 0) bars = 1;
-                        bars *= 10;
+                        e.Graphics.DrawString(10 + "^" + bars.ToString(), font, drawBrush, 10, 245 - i * 230 / (quantityBarCount - 1), drawFormat);
+                        ++bars;
                     }
                 }
                 int h = 260;
@@ -108,15 +119,15 @@ namespace WinFormsControlLibrary1
                     else h = 275;
                     if (mode == 1) height = ((float)typesQuantity[i].Item2 / barQuantity) * 230;
                     else height = (float)(Math.Log10(typesQuantity[i].Item2) / Math.Log10(barQuantity)) * 230;
-                    e.Graphics.DrawString(typesQuantity[i].Item1, font, drawBrush, 54 + 20 * i, h, drawFormat);
-                    e.Graphics.FillRectangle(colorBrush[i], 54 + i * 20, 255 - height, 12, height);
-                    e.Graphics.DrawRectangle(blackPen, 54 + i * 20, 255 - height, 12, height);
+                    e.Graphics.DrawString(typesQuantity[i].Item1, font, drawBrush, 54 + skip * i, h, drawFormat);
+                    e.Graphics.FillRectangle(colorBrush[i], 54 + i * skip, 255 - height, 12, height);
+                    e.Graphics.DrawRectangle(blackPen, 54 + i * skip, 255 - height, 12, height);
 
                     if (mode == 1) height = ((float)typesVolume[i].Item2 / barVolume) * 230;
                     else height = (float)(Math.Log10(typesVolume[i].Item2) / Math.Log10(barVolume)) * 230;
-                    e.Graphics.DrawString(typesVolume[i].Item1, font, drawBrush, 304 + 20 * i, h, drawFormat);
-                    e.Graphics.FillRectangle(colorBrush[i], 304 + i * 20, 255 - height, 12, height);
-                    e.Graphics.DrawRectangle(blackPen, 304 + i * 20, 255 - height, 12, height);
+                    e.Graphics.DrawString(typesVolume[i].Item1, font, drawBrush, 304 + skip * i, h, drawFormat);
+                    e.Graphics.FillRectangle(colorBrush[i], 304 + i * skip, 255 - height, 12, height);
+                    e.Graphics.DrawRectangle(blackPen, 304 + i * skip, 255 - height, 12, height);
                 }
             }
         }
